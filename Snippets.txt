@@ -1,0 +1,15 @@
+NoOfUniqueTestedPerRTCenter = CALCULATE(
+                              DISTINCTCOUNT(Citizens[SocialID]),
+                              CROSSFILTER('Rapid Tests'[SocialID],Citizens[SocialID],Both))
+
+NoOfCitizensPerDay = CALCULATE(COUNT(Citizens[dob])+0)
+
+NationalPlanid = Vaccinations[vaccinecode] & Vaccinations[vaccinecentercode] & Vaccinations[datekey]
+
+VaccinationTarget = 0.7 * COUNT(Citizens[SocialID])
+
+YTD Vaccinations = TOTALYTD(COUNT(Vaccinations[NationalPlanID]),'Calendar'[Date])
+
+Negative Outcome = CALCULATE( COUNTROWS('Rapid Tests'),FILTER('Rapid Tests','Rapid Tests'[outcome] = "negative"))
+
+Positive Outcome = CALCULATE( COUNTROWS('Rapid Tests'),FILTER('Rapid Tests','Rapid Tests'[outcome] = "positive"))
